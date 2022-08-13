@@ -7,6 +7,9 @@ from carFactory import Palindrome, CarFactory
 from carFactory import Rorschach
 from carFactory.thovex import Thovex
 
+from tire.carrigan import Carrigan
+from tire.octoprime import Octoprime
+
 
 class TestCalliope(unittest.TestCase):
     def test_battery_should_be_serviced(self):
@@ -182,6 +185,24 @@ class TestThovex(unittest.TestCase):
 
         car = CarFactory.create_thovex(last_service_date, current_mileage, last_service_mileage)
         self.assertFalse(car.needs_service())
+
+class TestCarriganTire(unittest.TestCase):
+    def test_tire_should_be_serviced(self):
+        tire = Carrigan([0.9, 0.8, 0.98, 0.7])
+        self.assertTrue(tire.needs_service())
+
+    def test_tire_should_not_be_serviced(self):
+        tire = Carrigan([0.8, 0.8, 0.8, 0.7])
+        self.assertFalse(tire.needs_service())
+
+class TestOctoprimeTire(unittest.TestCase):
+    def test_tire_should_be_serviced(self):
+        tire = Octoprime([0.9, 0.8, 0.98, 0.7])
+        self.assertTrue(tire.needs_service())
+
+    def test_tire_should_not_be_serviced(self):
+        tire = Octoprime([0.5, 0.8, 0.5, 0.7])
+        self.assertFalse(tire.needs_service())
 
 
 if __name__ == '__main__':
